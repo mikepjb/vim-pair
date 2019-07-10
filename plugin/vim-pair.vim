@@ -26,10 +26,10 @@ function! s:delete_pair()
     endif
 endfunction
 
-inoremap <expr> ( s:open_pair("(",")")
-inoremap <expr> [ s:open_pair("[","]")
-inoremap <expr> { s:open_pair("{","}")
-inoremap <expr> ) s:close_pair("(",")")
-inoremap <expr> ] s:close_pair("[","]")
-inoremap <expr> } s:close_pair("{","}")
-inoremap <expr>  s:delete_pair()
+inoremap <expr> ( :call <sid>open_pair("(",")")
+inoremap <expr> [ :call <sid>open_pair("[","]")
+inoremap <expr> { :call <sid>open_pair("{","}")
+inoremap <expr> ) :call <sid>close_pair("(",")")
+inoremap <expr> ] :call <sid>close_pair("[","]")
+inoremap <expr> } :call <sid>close_pair("{","}")
+inoremap <expr>  :call <sid>delete_pair()
