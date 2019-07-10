@@ -1,8 +1,8 @@
-function! s:open_pair(left, right)
+function! OpenPair(left, right)
   return a:left . a:right . "\<Left>"
 endfunction
 
-function! s:close_pair(left, right)
+function! ClosePair(left, right)
     let current_char = matchstr(getline('.'), '\%' . col('.') . 'c.')
     if current_char == a:right
         return "\<Right>"
@@ -11,7 +11,7 @@ function! s:close_pair(left, right)
     endif
 endfunction
 
-function! s:delete_pair()
+function! DeletePair()
     let previous_char = matchstr(getline('.'), '\%' . (col('.')-1) . 'c.')
     let current_char = matchstr(getline('.'), '\%' . col('.') . 'c.')
     if (current_char == ")" && previous_char == "(") ||
@@ -26,10 +26,10 @@ function! s:delete_pair()
     endif
 endfunction
 
-inoremap <expr> ( :call <sid>open_pair("(",")")
-inoremap <expr> [ :call <sid>open_pair("[","]")
-inoremap <expr> { :call <sid>open_pair("{","}")
-inoremap <expr> ) :call <sid>close_pair("(",")")
-inoremap <expr> ] :call <sid>close_pair("[","]")
-inoremap <expr> } :call <sid>close_pair("{","}")
-inoremap <expr>  :call <sid>delete_pair()
+inoremap <expr> ( :call OpenPair("(",")")
+inoremap <expr> [ :call OpenPair("[","]")
+inoremap <expr> { :call OpenPair("{","}")
+inoremap <expr> ) :call ClosePair("(",")")
+inoremap <expr> ] :call ClosePair("[","]")
+inoremap <expr> } :call ClosePair("{","}")
+inoremap <expr>  :call DeletePair()
