@@ -26,10 +26,10 @@ function! DeletePair()
     endif
 endfunction
 
-inoremap <expr> ( :call OpenPair("(",")")
-inoremap <expr> [ :call OpenPair("[","]")
-inoremap <expr> { :call OpenPair("{","}")
-inoremap <expr> ) :call ClosePair("(",")")
-inoremap <expr> ] :call ClosePair("[","]")
-inoremap <expr> } :call ClosePair("{","}")
-inoremap <expr>  :call DeletePair()
+inoremap <expr> ( OpenPair("(",")")
+inoremap <expr> [ OpenPair("[","]")
+inoremap <expr> { OpenPair("{","}")
+inoremap <expr> ) ClosePair("(",")")
+inoremap <expr> ] ClosePair("[","]")
+inoremap <expr> } ClosePair("{","}")
+inoremap <expr>  DeletePair()
