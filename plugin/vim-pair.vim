@@ -32,4 +32,9 @@ inoremap <expr> { OpenPair("{","}")
 inoremap <expr> ) ClosePair("(",")")
 inoremap <expr> ] ClosePair("[","]")
 inoremap <expr> } ClosePair("{","}")
-inoremap <expr>  DeletePair()
+
+if has('nvim')
+  inoremap <expr> <BS> DeletePair()
+else
+  inoremap <expr>  DeletePair()
+endif
