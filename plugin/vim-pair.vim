@@ -17,7 +17,9 @@ function! DeletePair()
   if (current_char == ")" && previous_char == "(") ||
         \ (current_char == "]" && previous_char == "[") ||
         \ (current_char == "}" && previous_char == "{") ||
-        \ (current_char == "\"" && previous_char == "\"")
+        \ (current_char == "\"" && previous_char == "\"") ||
+        \ (current_char == "'" && previous_char == "'") ||
+        \ (current_char == "`" && previous_char == "`")
     return "\<Left>\<C-o>2s"
   elseif previous_char == ")"
     return "\<Left>"
@@ -27,8 +29,11 @@ function! DeletePair()
 endfunction
 
 function! OpenCloseCharacter(character)
-  return strpart(getline('.'), col('.')-1, 1) == a:character ? "\<Right>"
-        \: a:character . a:character . "\<Left>"
+  if strpart(getline('.'), col('.')-1, 1) == a:character
+    return "\<Right>"
+  else
+    return a:character . a:character . "\<Left>"
+  endif
 endfunction
 
 inoremap <expr> ( OpenPair("(",")")
@@ -40,6 +45,7 @@ inoremap <expr> } ClosePair("{","}")
 
 inoremap <expr> " OpenCloseCharacter('"')
 inoremap <expr> ' OpenCloseCharacter("'")
+inoremap <expr> ` OpenCloseCharacter("`")
 
 if has('nvim')
   inoremap <expr> <BS> DeletePair()
